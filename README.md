@@ -17,7 +17,7 @@ It supports:
 
 ## Frontend
 
-- Next.js 14 (App Router)
+- Next.js (App Router)
 - Tailwind CSS
 - Shadcn UI
 - Axios
@@ -29,15 +29,14 @@ It supports:
 - Node.js
 - Express.js
 - MongoDB
-- Mongoose
 - JWT (Access + Refresh Tokens)
 - Bcrypt
 - Stripe SDK
 
 ## Infrastructure
 
-- Redis (Availability caching - optional)
 - Cloudinary (Image storage)
-- SendGrid (Email service)
+- NodeMailer (Email service)
+- Google API
 
 ---
