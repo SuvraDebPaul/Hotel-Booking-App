@@ -18,8 +18,8 @@ const notFound = () => {
             </div>
 
             <div className='relative z-10 top-140 flex justify-center items-center'>
-                <Link href={"/"} className='bg-red-500 border-0 hover:bg-red-700 mt-10 p-2 px-3 rounded-xl hover:scale-[1.01] transition-all duration-300 font-semibold cursor-pointer flex justify-center items-center gap-2 text-sm md:text-md'>
-                Back to Home <FaHome/>
+                <Link href={"/"} className='bg-red-400 border-0 hover:bg-red-600 mt-10 p-2 px-3 rounded-xl hover:scale-[1.01] transition-all duration-300 font-semibold cursor-pointer flex justify-center items-center gap-2 text-sm md:text-md'>
+                Back to Home<FaHome/>
                 </Link>
             </div>
         </div>
