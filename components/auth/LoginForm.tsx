@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginSchema, LoginType } from "@/lib/auth.schema";
+import { loginSchema, LoginType } from "@/lib/Auth_Schema/login.schema";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -13,13 +13,16 @@ import { Label } from "@/components/ui/label";
 import SocialLogin from "../Buttons/SocialLogin";
 import Link from "next/link";
 import Swal from "sweetalert2";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 
 export default function LoginForm() {
     const router = useRouter();
     const [serverError, setServerError] = useState("");
     const params = useSearchParams()
-    const callback = params.get("callbackUrl") || "/"
+    const callback = params.get("callbackUrl") || "/";
+    const [showPass, setShowPass] = useState<boolean>(false);
+
 
     const {
         register,
@@ -36,7 +39,8 @@ export default function LoginForm() {
             email: data.email,
             password: data.password,
             redirect: false,
-            callbackUrl: callback
+            callbackUrl: callback,
+            remember: data.remember
         });
 
         if (result?.error) {
@@ -67,7 +71,7 @@ export default function LoginForm() {
                     {/* Email */}
                     <div>
                         <Label className="mb-2">Email</Label>
-                        <Input type="email" {...register("email")} />
+                        <Input placeholder="example@gmail.com" type="email" {...register("email")} />
                         {errors.email && (
                             <p className="text-sm text-destructive mt-1">
                                 {errors.email.message}
@@ -76,9 +80,16 @@ export default function LoginForm() {
                     </div>
 
                     {/* Password */}
-                    <div>
+                    <div className="relative">
                         <Label className="mb-2">Password</Label>
-                        <Input type="password" {...register("password")} />
+                        <Input placeholder="••••••••" type={showPass ? "text" : "password"} {...register("password")} />
+                                                <span
+                                                    onClick={() => setShowPass(!showPass)}
+                                                    className="absolute right-4 top-8 cursor-pointer"
+                                                >
+                                                    {showPass ? <FaEyeSlash /> : <FaEye />}
+                                                </span>
+                        
                         {errors.password && (
                             <p className="text-sm text-destructive mt-1">
                                 {errors.password.message}
@@ -90,14 +101,14 @@ export default function LoginForm() {
                     <div className="flex items-center justify-between text-sm">
                         <div className="flex items-center gap-2">
                             <input
-                             required                               type="checkbox"
+                              type="checkbox"
                                 {...register("remember")}
                                 className="h-4 w-4 rounded border border-border cursor-pointer"
                             />
                             <Label>Remember me</Label>
                         </div>
 
-                        <Link href={'/forgetPass'}
+                        <Link href={'/forget-password'}
                             type="button"
                             className="text-blue-400 hover:underline hover:text-blue-600 hover:font-medium transition-all duration-300"
                         >
@@ -133,4 +144,4 @@ export default function LoginForm() {
             </CardContent>
         </Card>
     );
-}
+} 
