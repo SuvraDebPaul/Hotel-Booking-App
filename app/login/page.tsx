@@ -1,6 +1,7 @@
 import LoginForm from "@/components/auth/LoginForm";
 import Image from "next/image";
 import img from '../../public/login_page_image.webp'
+import { Suspense } from "react";
 
 export default function LoginPage() {
     return (
@@ -33,7 +34,9 @@ export default function LoginPage() {
             {/* RIGHT SIDE - FORM */}
             <div className="flex items-center justify-center bg-background p-6 lg:p-12">
                 <div className="w-full max-w-md">
-                    <LoginForm />
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <LoginForm />
+                    </Suspense>
                 </div>
             </div>
         </div>
