@@ -92,7 +92,7 @@ export default function LoginForm() {
                             <input
                              required                               type="checkbox"
                                 {...register("remember")}
-                                className="h-4 w-4 rounded border border-border"
+                                className="h-4 w-4 rounded border border-border cursor-pointer"
                             />
                             <Label>Remember me</Label>
                         </div>
@@ -111,7 +111,7 @@ export default function LoginForm() {
 
                     <Button
                         type="submit"
-                        className="w-full"
+                        className="w-full cursor-pointer font-bold shadow-lg hover:shadow-xl hover:scale-[1.01] transition-all duration-300"
                         disabled={isSubmitting}
                     >
                         {isSubmitting ? "Logging in..." : "Login"}
