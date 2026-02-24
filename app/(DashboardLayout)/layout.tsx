@@ -1,5 +1,7 @@
+import DashboardNavbar from "@/components/dashboard/dashboard-navbar";
 import { AppSidebar } from "@/components/dashboard/dashboard-sidebar";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { ThemeProvider } from "@/components/theme/theme-provider";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
 export default function DashboardLayout({
   children,
@@ -7,12 +9,30 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <main className="m-2 p-2 border-2 w-full rounded-2xl">
-        <SidebarTrigger />
-        {children}
-      </main>
-    </SidebarProvider>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
+      <SidebarProvider
+        style={
+          {
+            "--sidebar-width": "14rem",
+            "--sidebar-width-mobile": "16rem",
+          } as React.CSSProperties
+        }
+      >
+        <AppSidebar />
+        <main className="w-full">
+          <nav className="m-4 ml-0">
+            <DashboardNavbar />
+          </nav>
+          <section className="m-2 ml-0 mb-0 p-2 h-full rounded-t-2xl  bg-sidebar-background">
+            {children}
+          </section>
+        </main>
+      </SidebarProvider>
+    </ThemeProvider>
   );
 }

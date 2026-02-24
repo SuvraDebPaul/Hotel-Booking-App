@@ -13,12 +13,6 @@ const SocialLogin = () => {
     const handleGoogle = async () => {
         const result = await signIn("google", { callbackUrl: callback })
         if (result?.ok) {
-            Swal.fire({
-                title: "Welcome Back",
-                text: "You Successfully Logged in your account",
-                icon: "success",
-                confirmButtonColor: "#2387fa"
-            });
             router.push(callback)
         }
     }

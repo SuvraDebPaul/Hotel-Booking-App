@@ -12,6 +12,7 @@ export default function LoginPage() {
                 <Image
                     src={img}
                     alt="Luxury Hotel"
+                    sizes="full"
                     fill
                     priority
                     className="object-cover"

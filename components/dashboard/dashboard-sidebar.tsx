@@ -9,8 +9,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarRail,
-  SidebarTrigger,
+  SidebarSeparator,
 } from "@/components/ui/sidebar";
 import {
   Tooltip,
@@ -19,15 +18,27 @@ import {
 } from "@/components/ui/tooltip";
 import {
   BookCheck,
+  ChevronUp,
   CreditCard,
   HeartPlus,
   Hotel,
   LayoutDashboard,
   LogOut,
   MessageCircleCheck,
+  User2,
   UserRoundCog,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
+import Logo from "../../public/Logo.png";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Badge } from "../reui/badge";
 
 const menuItems = [
   {
@@ -194,7 +205,7 @@ const menuItems = [
       {
         icon: <LayoutDashboard />,
         label: "Dashboard",
-        href: "/admin/dashboard",
+        href: "/dashboard",
         visible: ["admin"],
       },
       {
@@ -237,30 +248,35 @@ const menuItems = [
   },
 ];
 
-const userRole = "user";
+const userRole = "admin";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar collapsible="icon">
+    <Sidebar collapsible="icon" {...props} className="border-0!">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <Link href={"/"}>
-                {/* <Image src={Logo} alt="Logo" width={32} height={32} /> */}
-                <Hotel />
-                <span>HotelMania</span>
+              <Link href={"/"} className="mt-2">
+                <Image
+                  src={Logo}
+                  alt="Logo"
+                  width={30}
+                  height={30}
+                  className="object-contain"
+                />
+                <span className="text-xl font-bold uppercase">HotelMania</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
+
       <SidebarContent>
         {menuItems.map((menuItem) => {
           const visibleItems = menuItem.items.filter((item) =>
             item.visible.includes(userRole),
           );
-
           if (!visibleItems.length) return null;
 
           return (
@@ -281,6 +297,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                             </Link>
                           </SidebarMenuButton>
                         </TooltipTrigger>
+                        {/* Tooltip only visible when collapsed */}
                         <TooltipContent side="right">
                           {item.label}
                         </TooltipContent>
@@ -294,10 +311,46 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         })}
       </SidebarContent>
 
+      <SidebarSeparator />
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <Tooltip>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <SidebarMenuButton>
+                  <div className="flex items-center gap-1.5">
+                    <Avatar>
+                      <AvatarImage
+                        src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=96&h=96&dpr=2&q=80"
+                        alt="Alex Johnson"
+                      />
+                      <AvatarFallback>AJ</AvatarFallback>
+                    </Avatar>
+                    <div className="flex flex-col">
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-sm font-semibold">
+                          Alex Johnson
+                        </span>
+                        <Badge variant="default" size="xs">
+                          Admin
+                        </Badge>
+                      </div>
+                      <span className="text-muted-foreground text-xs">
+                        Founder & CEO
+                      </span>
+                    </div>
+                  </div>
+                  <ChevronUp className="ml-auto" />
+                </SidebarMenuButton>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem>
+                  <LogOut />
+                  <span>Logout</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            {/* <Tooltip>
               <TooltipTrigger asChild>
                 <SidebarMenuButton>
                   <LogOut />
@@ -306,14 +359,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   </span>
                 </SidebarMenuButton>
               </TooltipTrigger>
-              <TooltipContent side="right">Logout</TooltipContent>
-            </Tooltip>
+              <TooltipContent
+                side="right"
+                className="group-data-[collapsed=true]/sidebar:block hidden"
+              >
+                Logout
+              </TooltipContent>
+            </Tooltip> */}
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>
 
       {/* Collapsed rail */}
-      <SidebarRail />
+      {/* <SidebarRail /> */}
     </Sidebar>
   );
 }
