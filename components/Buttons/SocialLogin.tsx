@@ -1,9 +1,9 @@
 "use client"
+
 import { Button } from '../ui/button';
 import { signIn } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FcGoogle } from "react-icons/fc";
-import Swal from 'sweetalert2';
 
 const SocialLogin = () => {
     const router = useRouter()

@@ -83,12 +83,11 @@ export default function LoginForm() {
                     <div className="relative">
                         <Label className="mb-2">Password</Label>
                         <Input placeholder="••••••••" type={showPass ? "text" : "password"} {...register("password")} />
-                                                <span
-                                                    onClick={() => setShowPass(!showPass)}
-                                                    className="absolute right-4 top-8 cursor-pointer"
-                                                >
-                                                    {showPass ? <FaEyeSlash /> : <FaEye />}
-                                                </span>
+                        <span
+                            onClick={() => setShowPass(!showPass)}
+                            className="absolute right-4 top-8 cursor-pointer">
+                            {showPass ? <FaEyeSlash /> : <FaEye />}
+                        </span>
                         
                         {errors.password && (
                             <p className="text-sm text-destructive mt-1">
@@ -136,11 +135,14 @@ export default function LoginForm() {
                     <div className="h-px flex-1 bg-border" />
                 </div>
 
-                {/* Google Login */}
+                {/* Social Login */}
+
                 <SocialLogin></SocialLogin>
+
                 <Link href={"/register"}>
                     Don’t have an account?{" "} <span className="text-blue-400 hover:underline hover:text-blue-600 hover:font-medium transition-all duration-300">Create one</span>
                 </Link>
+                
             </CardContent>
         </Card>
     );
