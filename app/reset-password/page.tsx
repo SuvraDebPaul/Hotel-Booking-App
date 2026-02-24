@@ -1,5 +1,10 @@
 import ResetPasswordClient from "@/components/auth/reset-password-client";
 import { Suspense } from "react";
+
+export const metadata = {
+    title: "Reset Password"
+}
+
  
 export default function ResetPasswordPage() {
     return (

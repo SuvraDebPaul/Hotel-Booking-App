@@ -3,11 +3,16 @@ import img from '../../public/register_page_image.avif'
 import RegisterForm from '@/components/auth/RegisterForm';
 import { Suspense } from 'react';
 
+export const metadata = {
+    title: "Registration"
+}
+
+
 const Register = () => {
     return (
         <div className="min-h-screen grid lg:grid-cols-2">
 
-            {/* LEFT SIDE - IMAGE + OVERLAY */}
+            {/* LEFT SIDE */}
             <div className="flex items-center justify-center bg-background p-6 lg:p-12">
                 <div className="w-full max-w-md">
                     <Suspense>
@@ -16,7 +21,7 @@ const Register = () => {
                 </div>
             </div>
 
-            {/* RIGHT SIDE - FORM */}
+            {/* RIGHT SIDE */}
             <div className="relative hidden lg:block">
                 <Image
                     src={img}
@@ -27,10 +32,8 @@ const Register = () => {
                     className="object-cover"
                 />
 
-                {/* Dark overlay */}
                 <div className="absolute inset-0 bg-black/50" />
 
-                {/* Branding text */}
                 <div className="absolute inset-0 flex flex-col justify-end p-12 text-white z-10">
                     <h1 className="text-4xl font-bold mb-4">
                         Create Your Luxury Escape

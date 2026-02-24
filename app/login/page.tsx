@@ -3,11 +3,15 @@ import Image from "next/image";
 import img from '../../public/login_page_image.webp'
 import { Suspense } from "react";
 
+export const metadata = {
+    title: "Login"
+}
+
 export default function LoginPage() {
     return (
         <div className="min-h-screen grid lg:grid-cols-2">
 
-            {/* LEFT SIDE - IMAGE + OVERLAY */}
+            {/* LEFT SIDE */}
             <div className="relative hidden lg:block">
                 <Image
                     src={img}
@@ -18,10 +22,8 @@ export default function LoginPage() {
                     className="object-cover"
                 />
 
-                {/* Dark overlay */}
                 <div className="absolute inset-0 bg-black/50" />
 
-                {/* Branding text */}
                 <div className="absolute inset-0 flex flex-col justify-end p-12 text-white z-10">
                     <h1 className="text-4xl font-bold mb-4">
                         Experience Luxury & Comfort
@@ -32,7 +34,7 @@ export default function LoginPage() {
                 </div>
             </div>
 
-            {/* RIGHT SIDE - FORM */}
+            {/* RIGHT SIDE */}
             <div className="flex items-center justify-center bg-background p-6 lg:p-12">
                 <div className="w-full max-w-md">
                     <Suspense fallback={<div>Loading...</div>}>
